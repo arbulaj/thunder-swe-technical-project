@@ -1,0 +1,222 @@
+<section class="lineups-dashboard">
+  <header class="dashboard-header">
+    <div>
+      <p class="eyebrow">OKC THUNDER · LINEUP ANALYTICS</p>
+      <h1>Lineups Summary</h1>
+      <p class="subtitle">
+        Explore lineup performance across the league using possession-level data.
+      </p>
+    </div>
+
+    <mat-form-field appearance="outline" class="lineup-selector">
+      <mat-label>Lineup size</mat-label>
+      <mat-select
+        [(ngModel)]="leagueLineupSize"
+        (selectionChange)="changeLeagueLineupSize()"
+      >
+        @for (lineupSize of lineupSizes; track lineupSize.value) {
+          <mat-option [value]="lineupSize.value">
+            {{ lineupSize.label }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </header>
+
+  @if (loading) {
+    <div class="state-card">
+      <div class="spinner"></div>
+      <p>Loading lineup data...</p>
+    </div>
+  }
+
+  @if (errorMessage) {
+    <div class="state-card error">
+      <h2>Unable to load data</h2>
+      <p>{{ errorMessage }}</p>
+    </div>
+  }
+
+  @if (!loading && !errorMessage && lineups.length > 0) {
+    <section class="top-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">TOP PERFORMERS</p>
+          <h2>Highest Net Rating</h2>
+        </div>
+        <span class="result-count">
+          {{ lineups.length }} lineups
+        </span>
+      </div>
+
+      <div class="top-grid">
+        @for (lineup of getTopLineups(); track trackByLineup($index, lineup)) {
+          <article class="top-card">
+            <div class="rank">#{{ $index + 1 }}</div>
+
+            <div class="top-card-content">
+              <h3>{{ getPlayerNames(lineup) }}</h3>
+
+              <div class="primary-stat">
+                <span>NET RATING</span>
+                <strong>{{ lineup.net_rating.toFixed(2) }}</strong>
+              </div>
+
+              <div class="stat-row">
+                <span>
+                  <small>OFF RTG</small>
+                  {{ lineup.offensive_rating.toFixed(2) }}
+                </span>
+
+                <span>
+                  <small>DEF RTG</small>
+                  {{ lineup.defensive_rating.toFixed(2) }}
+                </span>
+
+                <span>
+                  <small>+/-</small>
+                  {{ lineup.point_differential }}
+                </span>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+
+    <section class="data-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">LEAGUE DATA</p>
+          <h2>Lineup Performance</h2>
+        </div>
+
+        <div class="search-box">
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="applyFilter()"
+            placeholder="Search player..."
+            aria-label="Search player"
+          />
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>LINEUP</th>
+
+              <th (click)="sortBy('total_possessions')" class="sortable">
+                POSS
+                <span>
+                  @if (sortColumn === 'total_possessions') {
+                    {{ sortAscending ? '↑' : '↓' }}
+                  }
+                </span>
+              </th>
+
+              <th (click)="sortBy('offensive_rating')" class="sortable">
+                OFF RTG
+                <span>
+                  @if (sortColumn === 'offensive_rating') {
+                    {{ sortAscending ? '↑' : '↓' }}
+                  }
+                </span>
+              </th>
+
+              <th (click)="sortBy('defensive_rating')" class="sortable">
+                DEF RTG
+                <span>
+                  @if (sortColumn === 'defensive_rating') {
+                    {{ sortAscending ? '↑' : '↓' }}
+                  }
+                </span>
+              </th>
+
+              <th (click)="sortBy('net_rating')" class="sortable">
+                NET RTG
+                <span>
+                  @if (sortColumn === 'net_rating') {
+                    {{ sortAscending ? '↑' : '↓' }}
+                  }
+                </span>
+              </th>
+
+              <th (click)="sortBy('offensive_efg_pct')" class="sortable">
+                eFG%
+                <span>
+                  @if (sortColumn === 'offensive_efg_pct') {
+                    {{ sortAscending ? '↑' : '↓' }}
+                  }
+                </span>
+              </th>
+
+              <th (click)="sortBy('total_rebounds')" class="sortable">
+                REB
+                <span>
+                  @if (sortColumn === 'total_rebounds') {
+                    {{ sortAscending ? '↑' : '↓' }}
+                  }
+                </span>
+              </th>
+
+              <th (click)="sortBy('offensive_assists')" class="sortable">
+                AST
+                <span>
+                  @if (sortColumn === 'offensive_assists') {
+                    {{ sortAscending ? '↑' : '↓' }}
+                  }
+                </span>
+              </th>
+
+              <th (click)="sortBy('offensive_turnovers')" class="sortable">
+                TOV
+                <span>
+                  @if (sortColumn === 'offensive_turnovers') {
+                    {{ sortAscending ? '↑' : '↓' }}
+                  }
+                </span>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (lineup of filteredLineups; track trackByLineup($index, lineup)) {
+              <tr>
+                <td class="lineup-cell">
+                  @for (player of lineup.players; track player.player_id) {
+                    <span class="player-chip">{{ player.name }}</span>
+                  }
+                </td>
+
+                <td>{{ lineup.total_possessions }}</td>
+                <td>{{ lineup.offensive_rating.toFixed(2) }}</td>
+                <td>{{ lineup.defensive_rating.toFixed(2) }}</td>
+
+                <td class="net-rating">
+                  {{ lineup.net_rating.toFixed(2) }}
+                </td>
+
+                <td>
+                  {{ (lineup.offensive_efg_pct * 100).toFixed(1) }}%
+                </td>
+
+                <td>{{ lineup.total_rebounds }}</td>
+                <td>{{ lineup.offensive_assists }}</td>
+                <td>{{ lineup.offensive_turnovers }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      @if (filteredLineups.length === 0) {
+        <div class="empty-state">
+          No lineups matched your search.
+        </div>
+      }
+    </section>
+  }
+</section>

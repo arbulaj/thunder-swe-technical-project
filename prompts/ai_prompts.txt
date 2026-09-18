@@ -1,0 +1,23 @@
+1. Prompt: Help me complete this OKC Thunder software engineering technical assessment.
+   Model queried: GPT-5.6 Luna
+
+2. Prompt: How do I download/clone the technical project and set up the repository?
+   Model queried: GPT-5.6 Luna
+
+3. Prompt: Help me set up PostgreSQL, Python 3.12.9, the virtual environment, dependencies, migrations, and data ingestion for the project.
+   Model queried: GPT-5.6 Luna
+
+4. Prompt: Help me implement get_lineup_league_summary_stats in backend/app/helpers/lineups.py according to the project requirements and add useful lineup performance metrics.
+   Model queried: GPT-5.6 Luna
+
+5. Prompt: Help me test the lineup API with different lineup sizes and troubleshoot the query parameter behavior.
+   Model queried: GPT-5.6 Luna
+
+6. Prompt: Help me build a useful frontend interface for the lineups-summary component using the backend lineup metrics.
+   Model queried: GPT-5.6 Luna
+
+7. Prompt: Help me troubleshoot the Angular frontend compilation errors and connect the lineup summary response component to the main lineups summary page.
+   Model queried: GPT-5.6 Luna
+
+8. Prompt: Help me analyze the API results to answer the three Part 3 data-analysis questions.
+   Model queried: GPT-5.6 Luna
