@@ -12,3 +12,4 @@ __pycache__/
 dbexport.pgsql
 
 .venv/
+frontend/browser/

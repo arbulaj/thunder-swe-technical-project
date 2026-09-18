@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const distPath = path.join(__dirname, 'dist', 'frontend', 'browser');
+const distPath = path.join(__dirname, 'browser');
 
 app.use(express.static(distPath));
 app.get(/.*/, function (req, res) {

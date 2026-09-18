@@ -20,9 +20,10 @@
       "architect": {
         "build": {
           "builder": "@angular/build:application",
-          "options": {
-            "browser": "src/main.ts",
-            "tsConfig": "tsconfig.app.json",
+         "options": {
+  "outputPath": "browser",
+  "browser": "src/main.ts",
+  "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {

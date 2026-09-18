@@ -21,3 +21,27 @@
 
 8. Prompt: Help me analyze the API results to answer the three Part 3 data-analysis questions.
    Model queried: GPT-5.6 Luna
+
+9. Prompt: Help me write the responses for the three Part 3 lineup analysis questions using the calculated lineup statistics.
+   Model queried: GPT-5.6 Sol
+
+10. Prompt: Help me initialize Git, commit the completed technical project, create/connect the GitHub repository, and push the project.
+    Model queried: GPT-5.6 Sol
+
+11. Prompt: Help me deploy the Django backend and PostgreSQL database to Railway and configure the required environment variables.
+    Model queried: GPT-5.6 Sol
+
+12. Prompt: Help me troubleshoot the Railway backend deployment and import my local PostgreSQL data into the Railway PostgreSQL database.
+    Model queried: GPT-5.6 Sol
+
+13. Prompt: Help me verify that the deployed backend API is connected to the production database and returning lineup data.
+    Model queried: GPT-5.6 Sol
+
+14. Prompt: Help me deploy the Angular frontend to Railway and configure it to use the production backend API.
+    Model queried: GPT-5.6 Sol
+
+15. Prompt: Help me troubleshoot the Railway frontend deployment, including the Angular build output directory and server configuration.
+    Model queried: GPT-5.6 Sol
+
+16. Prompt: Help me complete the final submission cleanup, including SUBMISSION.md, the AI prompt log, Git status, final deployment checks, and screen recording.
+    Model queried: GPT-5.6 Sol
