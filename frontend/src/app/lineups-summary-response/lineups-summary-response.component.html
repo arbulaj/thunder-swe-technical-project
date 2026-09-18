@@ -50,7 +50,7 @@
       </div>
 
       <div class="top-grid">
-        @for (lineup of getTopLineups(); track trackByLineup($index, lineup)) {
+        @for (lineup of topLineups; track trackByLineup($index, lineup)) {
           <article class="top-card">
             <div class="rank">#{{ $index + 1 }}</div>
 
@@ -183,7 +183,7 @@
           </thead>
 
           <tbody>
-            @for (lineup of filteredLineups; track trackByLineup($index, lineup)) {
+            @for (lineup of paginatedLineups; track trackByLineup($index, lineup)) {
               <tr>
                 <td class="lineup-cell">
                   @for (player of lineup.players; track player.player_id) {
@@ -211,7 +211,30 @@
           </tbody>
         </table>
       </div>
+      @if (filteredLineups.length > 0) {
+        <div class="pagination">
+          <button
+            type="button"
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+          >
+            Previous
+          </button>
 
+          <span>
+            Page {{ currentPage }} of {{ totalPages }}
+            · {{ filteredLineups.length }} lineups
+          </span>
+
+          <button
+            type="button"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+          >
+            Next
+          </button>
+        </div>
+      }
       @if (filteredLineups.length === 0) {
         <div class="empty-state">
           No lineups matched your search.
