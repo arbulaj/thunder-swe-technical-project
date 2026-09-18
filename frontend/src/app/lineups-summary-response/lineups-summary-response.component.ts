@@ -153,8 +153,7 @@ export class LineupsSummaryResponseComponent implements OnInit {
 
           // Calculate top five only when new API data arrives.
           this.topLineups = [...this.lineups]
-            .filter((lineup) => lineup.total_possessions >= 10)
-            .sort((a, b) => {
+           .sort((a, b) => {
               if (b.net_rating !== a.net_rating) {
                 return b.net_rating - a.net_rating;
               }
